@@ -1,0 +1,64 @@
+{% load static %}
+
+<html lang="en">
+
+<head>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <title>Quick Gantt Chart</title>
+
+</head>
+<body>
+
+   <script type = "text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+
+
+
+{% if user.is_authenticated %}
+
+Logged In as {{ user.username }}
+
+
+<form action="{% url 'logout_user' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+
+</form>
+
+{% else %}
+
+<a href="{% url 'signup_user' %}">Sign up</a>
+<a href="{% url 'login_user' %}">Login</a>
+
+{% endif %}
+
+{% block content%}{% endblock %}
+
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+<!--{% load static %-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    ...-->
+<!--    &lt;!&ndash; Bootstrap core CSS &ndash;&gt;-->
+<!--    <link href="{% static '"gantt_chart/css/bootstrap.min.css"' %}" rel="stylesheet">-->
+<!--</head>-->
+<!--<body>-->
+<!--    ...-->
+<!--    &lt;!&ndash; Bootstrap core JavaScript &ndash;&gt;-->
+<!--    <script src="{% static 'vendor/jquery/jquery.slim.min.js' %}"></script>-->
+<!--    <script src="{% static   'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>-->
+<!--</body>-->
+<!--</html>-->

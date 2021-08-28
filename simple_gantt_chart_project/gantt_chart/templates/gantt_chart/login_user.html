@@ -1,0 +1,17 @@
+{% extends 'gantt_chart/base.html' %}
+{% block content %}
+<br>
+<br>
+
+
+<h1>Login</h1>
+<h2>{{error}}</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{auth_form.as_p}}
+
+    <button type="submit">Login</button>
+</form>
+
+
+{% endblock %}
