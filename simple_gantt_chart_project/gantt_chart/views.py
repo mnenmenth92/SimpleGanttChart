@@ -48,3 +48,7 @@ def logout_user(request):
 
 def charts(request):
     return render(request, 'gantt_chart/charts.html',)
+
+
+def create_project(request):
+    return redirect('home')
