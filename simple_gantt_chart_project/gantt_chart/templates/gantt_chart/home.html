@@ -1,6 +1,25 @@
 {% extends 'gantt_chart/base.html' %}
 {% block content %}
 
-home
+
+    {% if user.is_authenticated %}
+<!-- logged in -->
+
+    <h5>Project</h5>
+    <form method="POST">
+    <input type="text">
+    {% csrf_token %}
+    {{ project_form.as_p }}
+    <button class="btn btn-sm btn-outline-secondary" type="submit" name="project">Create</button>
+    </form>
+    {% else %}
+<!--  not logged in  -->
+        Thank you for visiting this webssite.
+        Some more text.
+
+
+        Log in to create chart.
+
+    {% endif %}
 
 {% endblock %}

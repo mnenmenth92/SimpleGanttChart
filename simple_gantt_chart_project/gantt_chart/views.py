@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
+from .forms import ProjectForm
 
 
 def home(request):
@@ -47,8 +48,16 @@ def logout_user(request):
 
 
 def charts(request):
-    return render(request, 'gantt_chart/charts.html',)
+    return render(request, 'gantt_chart/charts.html',
+                  {'project_form': ProjectForm()})
 
 
 def create_project(request):
-    return redirect('home')
+    if request.method == 'GET':
+        return render(request, 'gantt_chart/home.html', )
+
+    else:
+        form = ProjectForm(request.POST)
+        temp_form = form.save(commit=False)
+        temp_form.user = request.user
+        temp_form.save()
