@@ -25,7 +25,8 @@ def signup_user(request):
                               {'user_creation_form': UserCreationForm, 'error': 'This username is already taken'})
 
         else:
-            return render(request, 'gantt_chart/signup_user.html', {'user_creation_form': UserCreationForm, 'error': 'Passwords did not match'})
+            return render(request, 'gantt_chart/signup_user.html', {'user_creation_form': UserCreationForm,
+                                                                    'error': 'Passwords did not match'})
 
 def login_user(request):
     if request.method == 'GET':
@@ -43,6 +44,7 @@ def login_user(request):
 
 def logout_user(request):
     if request.method == 'POST':
+
         logout(request)
         return redirect('home')
 
