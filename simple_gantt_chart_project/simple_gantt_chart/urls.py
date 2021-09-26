@@ -32,5 +32,6 @@ urlpatterns = [
     path('', gantt_chart_views.home, name='home'),
     path('charts/', gantt_chart_views.charts, name='charts'),
     path('create_project/', gantt_chart_views.create_project, name='create_project'),
+    path('save_gantt/', gantt_chart_views.save_gantt, name='save_gantt'),
 
 ]

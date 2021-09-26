@@ -48,6 +48,12 @@ def logout_user(request):
         logout(request)
         return redirect('home')
 
+def save_gantt(request):
+    if request.method == 'POST':
+
+        print('\n\n\SAVED!!!\n\n')
+
+
 
 def charts(request):
     return render(request, 'gantt_chart/charts.html',

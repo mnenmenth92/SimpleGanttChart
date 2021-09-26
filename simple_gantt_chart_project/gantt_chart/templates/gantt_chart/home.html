@@ -43,9 +43,11 @@
                 <div style="height: 10px;">                    
                 </div>
                   <div class="container" id="functinos">
-                      <button class="btn btn-sm btn-outline-secondary" id="addTask">add task</button>
-                      <button class="btn btn-sm btn-outline-secondary" id="addWeek">add week</button>
-                  </div>
+                      <button class="btn btn-sm btn-outline-secondary" id="addTask">Add task</button>
+                      <button class="btn btn-sm btn-outline-secondary" id="addWeek">Add week</button>
+                      <!-- save to be moved to the right hand side -->
+                      <button class="btn btn-sm btn-outline-secondary" id="saveButton">Save</button>
+                    </div>
 
 
 
@@ -69,6 +71,10 @@
         Log in to create chart.
 
     {% endif %}
+
+    <script>
+        var csrftoken = '{{ csrf_token }}';
+    </script>
 
 {% load static %}
 <script type = "text/javascript" src="{% static 'scripts/ganttChart.js'%}"></script>
