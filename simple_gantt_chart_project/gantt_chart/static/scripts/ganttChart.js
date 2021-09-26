@@ -52,13 +52,13 @@ function addNewTask(event=null){
     // create elements
     // row div
     const rowDiv = document.createElement('div');
-    addClasses(rowDiv,["row", "border", "border-white", "rounded"]);
+    addClasses(rowDiv,["row", "border", "border-top-0", "border-secondary", "rounded"]);
     // name div
     const nameDiv = document.createElement('div');
-    addClasses(nameDiv,["col-md-3", "border", "border-white", "rounded", "p-3", "bg-info"]);
+    addClasses(nameDiv,["col-md-3", "rounded", "p-3"]);
     // name input
     const nameInput = document.createElement('input');
-    addClasses(nameInput,["align-middle"]);
+    addClasses(nameInput,["align-middle", "form-control"]);
     nameInput.setAttribute("id", `${currentTask}`); 
     nameInput.addEventListener('input', () => {
         console.log(`switched button id: ${nameInput.id}, its value:${nameInput.value}`);
@@ -67,21 +67,21 @@ function addNewTask(event=null){
 
     // days div
     const daysDiv = document.createElement('div');
-    addClasses(daysDiv,["col-md-9", "border", "border-white", "rounded", "p-3", "bg-info"]);
+    addClasses(daysDiv,["col-md-9", "rounded", "p-3"]);
     // days
     for (let i =0; i < numOfWeeks * 7; i++){
 
         dayNumber = getDay(i)  // temporary ToDo
         monthNumber = currentMonth  // temporary ToDo
         const oneDay = document.createElement('button');
-        addClasses(oneDay,["align-middle"]);
+        addClasses(oneDay,["align-middle", "btn", "btn-sm", "btn-outline-secondary", "pr-auto"]);
         oneDay.setAttribute("style", "width: 40px; height: 25px;");
         oneDay.setAttribute("id", `${currentTask}.${monthNumber}.${dayNumber}`);  // each day id to find out which day was selected
         oneDay.addEventListener('click', () => {
-            console.log(`switched button id: ${oneDay.id}, its value:${oneDay.classList.contains('bg-danger')}`);
-            oneDay.classList.toggle('bg-danger');
+            console.log(`switched button id: ${oneDay.id}, its value:${oneDay.classList.contains('bg-warning')}`);
+            oneDay.classList.toggle('bg-warning');
             let selectedTaskNum = result[parseInt(oneDay.id.split('.')[0])]
-            if (oneDay.classList.contains('bg-danger')){
+            if (oneDay.classList.contains('bg-warning')){
                 selectedTaskNum.days.push(oneDay.id);
             }else{
                 let dayIndex =  selectedTaskNum.days.indexOf(oneDay.id)
