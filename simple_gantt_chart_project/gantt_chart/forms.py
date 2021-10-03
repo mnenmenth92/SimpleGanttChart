@@ -1,15 +1,8 @@
-from django.forms import ModelForm
-from .models import Project, Task
+from django import forms
 
-class ProjectForm(ModelForm):
-    class Meta:
-        model = Project
-        fields= ['title', 'date_completed']
+
+class jsonStringForm(forms.Form):
+    data = forms.CharField(max_length=10000)
 
 
 
-
-# todo check:
-"""
-https://stackoverflow.com/questions/866272/how-can-i-build-multiple-submit-buttons-django-form
-"""

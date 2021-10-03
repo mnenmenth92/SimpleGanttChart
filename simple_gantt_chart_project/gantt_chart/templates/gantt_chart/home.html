@@ -6,13 +6,6 @@
     {% if user.is_authenticated %}
 <!-- logged in -->
 
-    <!-- <h5>Project</h5>
-    <form method="POST">
-    <input type="text">
-    {% csrf_token %}
-    {{ project_form.as_p }}
-    <button class="btn btn-sm btn-outline-secondary" type="submit" name="project">Create</button>
-    </form> -->
 
 
     <div class="view-container">
@@ -46,7 +39,15 @@
                       <button class="btn btn-sm btn-outline-secondary" id="addTask">Add task</button>
                       <button class="btn btn-sm btn-outline-secondary" id="addWeek">Add week</button>
                       <!-- save to be moved to the right hand side -->
-                      <button class="btn btn-sm btn-outline-secondary" id="saveButton">Save</button>
+                     
+                      <form action="{% url 'home' %}" method="POST">
+                        {% csrf_token %}
+                        {{jsonForm.as_p}}
+                        <!-- {{jsonForm.as_hidden}} -->
+                        <button class="btn btn-sm btn-outline-secondary" type="submit" >Save</button>
+
+                      </form>
+                      
                     </div>
 
 
@@ -70,12 +71,11 @@
 
         Log in to create chart.
 
+        
+
     {% endif %}
 
-    <script>
-        var csrftoken = '{{ csrf_token }}';
-    </script>
-
+{% csrf_token %}
 {% load static %}
 <script type = "text/javascript" src="{% static 'scripts/ganttChart.js'%}"></script>
 

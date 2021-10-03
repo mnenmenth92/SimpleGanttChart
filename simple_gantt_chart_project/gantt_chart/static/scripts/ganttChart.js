@@ -1,14 +1,13 @@
 const addTask = document.querySelector('[id=addTask]');
 const addWeek = document.querySelector('[id=addWeek]');
-const saveButton = document.querySelector('[id=saveButton]');
 const projects = document.querySelector('[id=projects]');
 const daysTitles = document.getElementById('days-titles');
+const jsonData = document.getElementById('id_data');
 const currentDate = new Date(); 
 let numOfWeeks = 2;
 let currentMonth = currentDate.getUTCMonth();
 let startDay = currentDate.getUTCDay();
 let currentTask = 0;
-const saveUrl = 'save_gantt/'
 const result = []
 
 
@@ -21,6 +20,7 @@ console.log(addTask)
 addNewTask()
 fillDaysTitles()
 
+
 addWeek.addEventListener('click', (e) => {
 
     if (e){
@@ -30,23 +30,6 @@ addWeek.addEventListener('click', (e) => {
     console.log(result);
     });
 
-    saveButton.addEventListener('click', (e) => {
-
-    if (e){
-        e.preventDefault();
-    };
-
-    let postRequest = new XMLHttpRequest();
-    postRequest.open("POST", saveUrl, true);
-    postRequest.setRequestHeader('Content-Type', 'application/json');
-    console.log(csrftoken)
-    postRequest.send(JSON.stringify({
-        value: {csrfmiddlewaretoken: csrftoken,
-         result: result}
-    }));
-    console.log('save');
-    });
-    
 
 
 addTask.addEventListener('click', (e) => {
@@ -83,7 +66,10 @@ function addNewTask(event=null){
     nameInput.setAttribute("id", `${currentTask}`); 
     nameInput.addEventListener('input', () => {
         console.log(`switched button id: ${nameInput.id}, its value:${nameInput.value}`);
-        result[parseInt(nameInput.id)].taskName = nameInput.value
+        result[parseInt(nameInput.id)].taskName = nameInput.value;
+        
+        let resultString = "abcdes";  // ToDo result -> string
+        jsonData.value = resultString;
     });
 
     // days div
@@ -123,7 +109,7 @@ function addNewTask(event=null){
     rowDiv.appendChild(daysDiv);
     projects.appendChild(rowDiv);
 
-    currentTask++ //
+    currentTask++
 
 }
 

@@ -3,11 +3,25 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
-from .forms import ProjectForm
+from django.views.decorators.csrf import csrf_protect
+from .forms import jsonStringForm
+import json
 
-
+@csrf_protect
 def home(request):
-    return render(request, 'gantt_chart/home.html')
+    json_string_form = jsonStringForm(request.POST)
+    if request.method == 'POST':
+        data = json_string_form.data
+        gantt_data = data.getlist('data')[0]
+        print('\n\n\n3\n\n\n\n\ndata: {}'.format(gantt_data))
+        return redirect('home')
+
+    elif request.method == 'GET':
+        return render(request, 'gantt_chart/home.html', {'jsonForm': json_string_form})
+
+    else:
+        pass
+
 
 def signup_user(request):
 
@@ -39,12 +53,11 @@ def login_user(request):
                           {'auth_form': AuthenticationForm, 'error': 'Wrong username or password'})
         else:
             login(request, user)
-            return redirect('charts')
+            return redirect('home')
 
 
 def logout_user(request):
     if request.method == 'POST':
-
         logout(request)
         return redirect('home')
 
@@ -55,9 +68,13 @@ def save_gantt(request):
 
 
 
+
 def charts(request):
-    return render(request, 'gantt_chart/charts.html',
-                  {'project_form': ProjectForm()})
+    return render(request, 'gantt_chart/home.html')
+
+# def charts(request):
+#     return render(request, 'gantt_chart/charts.html',
+#                   {'project_form': ProjectForm()})
 
 
 def create_project(request):
