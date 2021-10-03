@@ -42,9 +42,10 @@
                      
                       <form action="{% url 'home' %}" method="POST">
                         {% csrf_token %}
+                        <button class="btn btn-sm btn-outline-secondary" type="submit" >Save</button>
                         {{jsonForm.as_p}}
                         <!-- {{jsonForm.as_hidden}} -->
-                        <button class="btn btn-sm btn-outline-secondary" type="submit" >Save</button>
+
 
                       </form>
                       

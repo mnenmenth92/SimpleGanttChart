@@ -101,6 +101,7 @@ function updateResultJson(){
                 let dayIndex =  selectedTaskNum.days.indexOf(oneDay.id)
                 selectedTaskNum.days.splice(dayIndex, 1)
             };
+            updateResultJson()
             console.log(selectedTaskNum.days)
         });
 
