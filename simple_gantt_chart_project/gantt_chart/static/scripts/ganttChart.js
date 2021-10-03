@@ -44,6 +44,14 @@ function addNewTask(event=null){
     };
 
 
+function updateResultJson(){
+
+    let resultString = JSON.stringify(result);
+    jsonData.value = resultString;
+    console.log(resultString)
+    };
+
+
     console.log('add task');
     // add task to result
     const taskElement = {
@@ -67,9 +75,8 @@ function addNewTask(event=null){
     nameInput.addEventListener('input', () => {
         console.log(`switched button id: ${nameInput.id}, its value:${nameInput.value}`);
         result[parseInt(nameInput.id)].taskName = nameInput.value;
-        
-        let resultString = "abcdes";  // ToDo result -> string
-        jsonData.value = resultString;
+        updateResultJson()
+
     });
 
     // days div
