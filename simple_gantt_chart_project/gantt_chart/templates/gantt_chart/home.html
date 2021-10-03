@@ -1,10 +1,14 @@
 {% extends 'gantt_chart/base.html' %}
 {% block content %}
 
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/styles.css'%}">
+
 
 
     {% if user.is_authenticated %}
 <!-- logged in -->
+
 
 
 
