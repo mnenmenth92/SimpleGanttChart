@@ -3,6 +3,7 @@ const addWeek = document.querySelector('[id=addWeek]');
 const projects = document.querySelector('[id=projects]');
 const daysTitles = document.getElementById('days-titles');
 const jsonData = document.getElementById('id_data');
+const projectName = document.getElementById('projectName')
 const currentDate = new Date(); 
 let numOfWeeks = 2;
 let currentMonth = currentDate.getUTCMonth();
@@ -46,7 +47,11 @@ function addNewTask(event=null){
 
 function updateResultJson(){
 
-    let resultString = JSON.stringify(result);
+    combinedData = {
+        projectName:projectName.value,
+        tasks: result
+    };
+    let resultString = JSON.stringify(combinedData);
     jsonData.value = resultString;
     console.log(resultString)
     };

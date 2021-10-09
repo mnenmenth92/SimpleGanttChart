@@ -14,8 +14,7 @@ class Project(models.Model):
 
 class Task(models.Model):
     title = models.CharField(max_length=100)
-    end_date = models.DateTimeField()
-    start_date = models.DateTimeField()
+    days = models.JSONField(default='')
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     def __str___(self):

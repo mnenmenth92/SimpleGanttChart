@@ -7,13 +7,27 @@ from django.views.decorators.csrf import csrf_protect
 from .forms import jsonStringForm
 import json
 
-@csrf_protect
+
+
+
+def project_to_db(data):
+    data_dict = json.loads(data)
+    print('\n')
+    print(data_dict)
+    print('\n')
+
+
 def home(request):
     json_string_form = jsonStringForm(request.POST)
     if request.method == 'POST':
         data = json_string_form.data
-        gantt_data = data.getlist('data')[0]
-        print('\n\n\n3\n\n\n\n\ndata: {}'.format(gantt_data))
+        # dict_data =jsonStringForm(data)
+        # gantt_data = dict_data.getlist('data')[0]
+        print('\n\n')
+        print(data)
+        print('\n\n')
+        # project_to_db('\n Project name: {} \nData: {}'.format(gantt_data['projectName'], gantt_data['tasks']))
+
         return redirect('home')
 
     elif request.method == 'GET':
