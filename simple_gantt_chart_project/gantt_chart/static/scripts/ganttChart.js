@@ -11,22 +11,37 @@ let currentMonth = currentDate.getUTCMonth();
 let startDay = currentDate.getUTCDay();
 let currentTask = 0;
 const result = []
-
+// get last url element
+const url = window.location.href
+let currentSegment = url.split("/").pop();
+// assuming there is only one url parameter
+currentSegment = currentSegment.substring(13, currentSegment.length-1);
 
 
 
 
 // add first, default task
-console.log(projects);
-console.log(addTask);
 addNewTask();
 fillDaysTitles();
+console.log(currentSegment)
 
-projectButtons.forEach(projectButton => {
+// fill project name
+projectName.value = currentSegment
+
+// add events to buttons in project list
+Array.prototype.forEach.call(projectButtons, function(projectButton) {
     projectButton.addEventListener('click', event => {
-      console.log(projectButton.name)
+      console.log(projectButton.value)
     })
-  });
+
+    // show selected project
+    if (projectButton.name == currentSegment){
+
+        addClasses(projectButton,["bg-secondary", "text-white"]);
+    }
+
+
+});
 
 
 addWeek.addEventListener('click', (e) => {
