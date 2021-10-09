@@ -7,7 +7,7 @@ class Project(models.Model):
     date_completed = models.DateTimeField(null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str___(self):
+    def __str__(self):
         return self.title
 
 
@@ -22,6 +22,6 @@ class Task(models.Model):
     days = models.JSONField(default='')
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
-    def __str___(self):
+    def __str__(self):
         return self.title
 

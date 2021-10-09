@@ -31,6 +31,17 @@ addWeek.addEventListener('click', (e) => {
     console.log(result);
     });
 
+    
+function updateResultJson(){
+
+    combinedData = {
+        projectName:projectName.value,
+        tasks: result
+    };
+    let resultString = JSON.stringify(combinedData);
+    jsonData.value = resultString;
+    console.log(resultString)
+    };
 
 
 addTask.addEventListener('click', (e) => {
@@ -42,18 +53,6 @@ function addNewTask(event=null){
 
     if (event){
         event.preventDefault();
-    };
-
-
-function updateResultJson(){
-
-    combinedData = {
-        projectName:projectName.value,
-        tasks: result
-    };
-    let resultString = JSON.stringify(combinedData);
-    jsonData.value = resultString;
-    console.log(resultString)
     };
 
 

@@ -36,14 +36,15 @@ def home(request):
     json_string_form = jsonStringForm(request.POST)
     if request.method == 'POST':
         project_to_db(request, json_string_form)
-
-
-        # project_to_db('\n Project name: {} \nData: {}'.format(gantt_data['projectName'], gantt_data['tasks']))
-
         return redirect('home')
 
     elif request.method == 'GET':
-        return render(request, 'gantt_chart/home.html', {'jsonForm': json_string_form})
+        if request.user.is_authenticated:
+            projects = Project.objects.filter(user=request.user)
+            return render(request, 'gantt_chart/home.html', {'jsonForm': json_string_form, 'projectList': projects})
+
+        else:
+            return render(request, 'gantt_chart/home.html', {'jsonForm': json_string_form})
 
     else:
         pass

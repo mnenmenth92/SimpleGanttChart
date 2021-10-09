@@ -17,6 +17,16 @@
         <div class="row rounded" >
             <div class="col-md-2 rounded">
               <p class="align-middle">Projects</p>
+
+              <div>
+                  {% for project in projectList %}
+                  <div class="row">
+                  <button class="btn btn-sm btn-outline-secondary border-0" id='project-selection-button'>{{ project.title }}</button>
+                  </div>
+                  {% endfor %}
+
+              </div>
+
             </div>
             <div class="col-md-10 border border-white rounded p-3 bg-light">
                 <p class="align-middle">
