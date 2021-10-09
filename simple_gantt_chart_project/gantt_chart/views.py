@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
@@ -29,6 +29,31 @@ def project_to_db(request, json_string_form):
             new_task.project = new_project
             new_task.save()
 
+def project_from_db(name):
+        selected_project = Project.objects.filter(title=name)[0]
+        selected_project_tasks = Task.objects.filter(project=selected_project)
+        all_tasks = []
+        for task in selected_project_tasks.values():
+
+           all_tasks.append(
+               {
+                   'taskName': task['title'],
+                   'days:': task['days']
+               }
+           )
+
+        result_dict = {
+            'projectName':selected_project.title,
+            'tasks': all_tasks
+        }
+        # ToDo put result string  to json and send to front
+        print(result_dict)
+
+"""
+ Project name: NewProject
+ Tasks: [{'id': 0, 'taskName': 'task1', 'days': ['0.9.6', '0.9.7']}, {'id': 1, 'taskName': 'task2', 'days': ['1.9.10', '1.9.13', '1.9.12', '1.9.11']}, {'id': 2, 'taskName': 'task3', 'days': ['2.9.18', '2.9.19']}]
+
+"""
 
 
 
@@ -41,8 +66,12 @@ def home(request):
     elif request.method == 'GET':
         if request.user.is_authenticated:
             projects = Project.objects.filter(user=request.user)
-            print('\nproject name: {}\n'.format(request.GET.get('projectName')))
-
+            try:
+                selected_project_name = request.GET.get('projectName')
+                project_from_db(selected_project_name)
+            except IndexError:
+                print('\nno project selected.')
+                
             return render(request, 'gantt_chart/home.html', {'jsonForm': json_string_form, 'projectList': projects})
         else:
             return render(request, 'gantt_chart/home.html', {'jsonForm': json_string_form})
