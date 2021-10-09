@@ -41,7 +41,11 @@ def home(request):
     elif request.method == 'GET':
         if request.user.is_authenticated:
             projects = Project.objects.filter(user=request.user)
+            print('\n\n')
+            print(request.GET)
+            print('\n\n')
             return render(request, 'gantt_chart/home.html', {'jsonForm': json_string_form, 'projectList': projects})
+
 
         else:
             return render(request, 'gantt_chart/home.html', {'jsonForm': json_string_form})

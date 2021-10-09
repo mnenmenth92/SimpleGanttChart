@@ -4,6 +4,7 @@ const projects = document.querySelector('[id=projects]');
 const daysTitles = document.getElementById('days-titles');
 const jsonData = document.getElementById('id_data');
 const projectName = document.getElementById('projectName')
+const projectButtons = document.getElementsByClassName('project-selection-button')
 const currentDate = new Date(); 
 let numOfWeeks = 2;
 let currentMonth = currentDate.getUTCMonth();
@@ -16,10 +17,16 @@ const result = []
 
 
 // add first, default task
-console.log(projects)
-console.log(addTask)
-addNewTask()
-fillDaysTitles()
+console.log(projects);
+console.log(addTask);
+addNewTask();
+fillDaysTitles();
+
+projectButtons.forEach(projectButton => {
+    projectButton.addEventListener('click', event => {
+      console.log(projectButton.name)
+    })
+  });
 
 
 addWeek.addEventListener('click', (e) => {
