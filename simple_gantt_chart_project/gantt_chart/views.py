@@ -6,26 +6,38 @@ from django.contrib.auth import login, logout, authenticate
 from django.views.decorators.csrf import csrf_protect
 from .forms import jsonStringForm
 import json
+from .models import Project, Task
 
 
 
 
-def project_to_db(data):
-    data_dict = json.loads(data)
-    print('\n')
-    print(data_dict)
-    print('\n')
+def project_to_db(request, json_string_form):
+        data = json.loads(json_string_form.data.dict()['data'])
+        project_name = data['projectName']
+        tasks = data['tasks']
+        print('\n Project name: {}\n Tasks: {} \n'.format(project_name, tasks))
+
+        new_project= Project()
+        new_project.title = project_name
+        new_project.user = request.user
+        new_project.save()
+        for task in tasks:
+            print('task name: {}, days: {}'.format(task['taskName'], task['days']))
+            new_task = Task()
+            new_task.title = task['taskName']
+            new_task.days = task['days']
+            new_task.project = new_project
+            new_task.save()
+
+
 
 
 def home(request):
     json_string_form = jsonStringForm(request.POST)
     if request.method == 'POST':
-        data = json_string_form.data
-        # dict_data =jsonStringForm(data)
-        # gantt_data = dict_data.getlist('data')[0]
-        print('\n\n')
-        print(data)
-        print('\n\n')
+        project_to_db(request, json_string_form)
+
+
         # project_to_db('\n Project name: {} \nData: {}'.format(gantt_data['projectName'], gantt_data['tasks']))
 
         return redirect('home')

@@ -13,6 +13,11 @@ class Project(models.Model):
 
 
 class Task(models.Model):
+    """
+    particular task model
+    to use JSONFiled JSON1 squlite extension must be installed
+    https://programmingmind.tech/blog/sqlite-does-not-support-json-fields-solved/
+    """
     title = models.CharField(max_length=100)
     days = models.JSONField(default='')
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
